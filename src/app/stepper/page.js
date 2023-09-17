@@ -1,11 +1,11 @@
+import Stepperr from '@/components/Stepperr'
 import React from 'react'
-import Emergencycontact from '../../components/Emergencycontact';
 
 const page = () => {
   return (
     <div>
-<Emergencycontact/>
 
+      <Stepperr/>
     </div>
   )
 }

@@ -11,7 +11,7 @@ const steps = [
   'Create an ad group',
   'Create an ad',
 ];
-const page = () => {
+const Stepperr = () => {
   return (
 <>
 <Box className="mt-20" sx={{ width: '100%' }}>
@@ -26,4 +26,4 @@ const page = () => {
 </>  )
 }
 
-export default page
+export default Stepperr
