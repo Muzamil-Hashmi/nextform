@@ -1,13 +1,15 @@
+import Stepperr from '@/components/Stepperr'
 import React from 'react'
 
 
 
 const page = () => {
   return (
-<>
-<h1 className='text-6xl text-red-400'>page</h1>
-
-</>  )
+    <>
+    
+      <Stepperr />
+    </>
+    )
 }
 
 export default page
