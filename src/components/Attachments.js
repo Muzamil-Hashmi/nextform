@@ -1,60 +1,39 @@
-'use client'
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
+import React from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
+const FileUploadButton = ({ label }) => {
+  return (
+    <div className="mb-4 md:w-1/2 lg:w-1/3 px-2">
+      <label className="block mb-2 text-gray-700">{label}</label>
+      <label
+        htmlFor={`upload-${label.toLowerCase().replace(/ /g, '-')}`}
+        className="block w-full h-32 bg-gray-100 border-2 border-gray-300 rounded-lg cursor-pointer hover:bg-gray-200 text-center"
+      >
+        <input
+          id={`upload-${label.toLowerCase().replace(/ /g, '-')}`}
+          type="file"
+          className="hidden"
+        />
+        <CloudUploadIcon className="mt-8 text-4xl text-gray-400" />
+        <p className="text-gray-500">Click to upload</p>
+      </label>
+    </div>
+  );
+};
 
 export default function InputFileUpload() {
   return (
-   <>
-   
-   <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-     Passport Copy head
-      <VisuallyHiddenInput type="file" />
-    </Button>
-    
-     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-     Visa
-      <VisuallyHiddenInput type="file" />
-    </Button>
-    
-     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-      Passport Copy dep1
-      <VisuallyHiddenInput type="file" />
-    </Button> 
-    
-    <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-     Visa dep1
-      <VisuallyHiddenInput type="file" />
-    </Button>
-    
-     <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-     Passport Copy dep2
-
-      <VisuallyHiddenInput type="file" />
-    </Button> 
-    
-    <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-     visa dep2
-      <VisuallyHiddenInput type="file" />
-    </Button>
-
-    <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-    Proof of Origin Head in case other Nationality
-      <VisuallyHiddenInput type="file" />
-    </Button>
-   </>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-semibold mb-4">File Upload</h1>
+      <div className="flex flex-wrap -mx-2">
+        <FileUploadButton label="Passport Copy head" />
+        <FileUploadButton label="Visa" />
+        <FileUploadButton label="Passport Copy dep1" />
+        <FileUploadButton label="Visa dep1" />
+        <FileUploadButton label="Passport Copy dep2" />
+        <FileUploadButton label="Visa dep2" />
+        <FileUploadButton label="Proof of Origin Head in case of other Nationality" />
+      </div>
+    </div>
   );
 }

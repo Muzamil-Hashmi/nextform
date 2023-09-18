@@ -4,25 +4,44 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://muzamil:BsEagDQ9bZOBq5Vj@cluster0.91h9ks2.mongodb.net/first_registration?retryWrites=true&w=majority&appName=AtlasApp"
+  url = "mongodb+srv://muzamil:BsEagDQ9bZOBq5Vj@cluster0.91h9ks2.mongodb.net/"
 }
 
 model User {
-  id                            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                            String    @id @default(auto()) @map("_id") @db.ObjectId
   email                         String
   fullname                      String
-  dateOfBirth                   DateTime // Changed to DateTime for Date Of Birth
+  dateOfBirth                   DateTime
   gender                        String
   maritalStatus                 String
   nationality                   String
   passportNumber                String
-  expiryOfPassport              DateTime // Changed to DateTime for Expiry of Passport
+  expiryOfPassport              DateTime
   proofOfPakistaniOrigin        String
   idNumberForProofOfOrigin      String
   occupation                    String
   detailsOfOccupation           String
   visaStatus                    String
-  expiryOfPermitVisa            DateTime // Changed to DateTime for Expiry of Permit/Visa
-  stayingInRawandaSince         DateTime // Changed to DateTime for Staying in Rwanda Since
+  expiryOfPermitVisa            DateTime
+  stayingInRawandaSince         DateTime
   livingWithDependantsInRawanda Boolean
+  mobileNumber                  String?    // Mobile Number (Changed to optional)
+  whatsappNumber                String?    // Whatsapp Number (Changed to optional)
+  address                       String?    // Address (Changed to optional)
+  province                      String?    // Province (Changed to optional)
+  district                      String?    // District (Changed to optional)
+  cell                          String?    // Cell (Changed to optional)
+  basicInfo                     String    // Basic Info
+  contactInfo                   String    // Contact Info
+  dependentInfo                 String    // Dependent Info
+  optional                      String    // Optional
+  emergencyContact              String    // Emergency Contact
+  confirmation                  String    // Confirmation
+  createNextApp                 String    // Create Next App
+  country                       String    // Country
+  city                          String    // City
+  otherFullAddress              String?    // Other Full Address (Changed to optional)
+  nameOfContactPerson           String?    // Name Of Contact Person (Changed to optional)
+  relationWithContactPerson     String?    // Relation with Contact Person (Changed to optional)
+  mobileNumberForContactPerson  String?    // Mobile Number for Contact Person (Changed to optional)
 }
