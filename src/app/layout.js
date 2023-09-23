@@ -1,5 +1,6 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { FormProvider } from '@/context/FormContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <FormProvider >
       <body className={inter.className}>{children}</body>
+      </FormProvider>
     </html>
   )
 }

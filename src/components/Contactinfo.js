@@ -1,62 +1,124 @@
-import React from 'react'
+"use client";
+import React from "react";
+import { useFormContext } from "@/context/FormContext"; 
 
 const Contactinfo = () => {
-  return (
-<>
+  const { formData, updateFormData } = useFormContext();
 
-{/* component */}
-<div className="flex items-center justify-center p-12">
-  {/* Author: FormBold Team */}
-  {/* Learn More: https://formbold.com */}
-  <div className="mx-auto w-full max-w-[550px]">
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+        updateFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  return (
+    <>
       <div className="mb-5">
-        <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
+        <label
+          htmlFor="mobileNumber"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
           Mobile Number
         </label>
-        <input type="number" name="number" id="number" placeholder="Mobile Number" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="number" 
+          name="mobileNumber"
+          id="mobileNumber"
+          value={formData.mobileNumber}
+          onChange={handleChange}
+          placeholder="Mobile Number"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
       <div className="mb-5">
-        <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
+        <label
+          htmlFor="whatsappNumber"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
           Whatsapp Number
         </label>
-        <input type="number" name="number" id="number" placeholder="Whatsaap Number" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="number"
+          name="whatsappNumber"
+          id="whatsappNumber"
+          value={formData.whatsappNumber}
+          onChange={handleChange}
+          placeholder="Whatsapp Number"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
       <div className="mb-5">
-        <label htmlFor="subject" className="mb-3 block text-base font-medium text-[#07074D]">
-          Adress
+        <label
+          htmlFor="address"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Address
         </label>
-        <input type="text" name="subject" id="subject" placeholder="Adress" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="text"
+          name="address"
+          id="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Address"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
       <div className="mb-5">
-        <label htmlFor="subject" className="mb-3 block text-base font-medium text-[#07074D]">
-          Provience
+        <label
+          htmlFor="province"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Province
         </label>
-        <input type="text" name="subject" id="subject" placeholder="Provience
-" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="text"
+          name="province"
+          id="province"
+          value={formData.province}
+          onChange={handleChange}
+          placeholder="Province"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
       <div className="mb-5">
-        <label htmlFor="subject" className="mb-3 block text-base font-medium text-[#07074D]">
-          Distric
+        <label
+          htmlFor="district"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          District
         </label>
-        <input type="text" name="subject" id="subject" placeholder="Distric" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="text"
+          name="district"
+          id="district"
+          value={formData.district}
+          onChange={handleChange}
+          placeholder="District"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
       <div className="mb-5">
-        <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
-         Cell
+        <label
+          htmlFor="cell"
+          className="mb-3 block text-base font-medium text-[#07074D]"
+        >
+          Cell
         </label>
-        <input type="number" name="number" id="number" placeholder="Cell" className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        <input
+          type="number"
+          name="cell"
+          id="cell"
+          value={formData.cell}
+          onChange={handleChange}
+          placeholder="Cell"
+          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+        />
       </div>
-      <div>
-        <button className="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-base font-semibold text-white outline-none">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
+    </>
+  );
+};
 
-</>  )
-}
-
-export default Contactinfo
+export default Contactinfo;

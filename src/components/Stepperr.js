@@ -1,32 +1,34 @@
-'use client'
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Basicinfo from './Basicinfo';
-import Contactinfo from './Contactinfo';
-import Dependent1 from './Dependent1';
-import Emergencycontact from './Emergencycontact';
-import Attachments from './Attachments';
+"use client";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Basicinfo from "./Basicinfo";
+import Contactinfo from "./Contactinfo";
+import Dependent1 from "./Dependent1";
+import Emergencycontact from "./Emergencycontact";
+import Attachments from "./Attachments";
+import { useFormContext } from "@/context/FormContext";
 
 const steps = [
-  'Basic Info',
-  'Contact Info',
-  'Dependent Info',
-  'Emergency Contact',
-  'Attachment',
-  'Confirmation'
+  "Basic Info",
+  "Contact Info",
+  "Dependent Info",
+  "Emergency Contact",
+  "Attachment",
+  "Confirmation",
 ];
 
 export default function HorizontalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
+  const { formData, updateFormData } = useFormContext();
 
   const isStepOptional = (step) => {
-    return step === 2 || step === 3; // Make steps 3 and 4 optional (you can adjust this as needed)
+    return step === 2 || step === 3;
   };
 
   const isStepSkipped = (step) => {
@@ -50,8 +52,6 @@ export default function HorizontalLinearStepper() {
 
   const handleSkip = () => {
     if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
       throw new Error("You can't skip a step that isn't optional.");
     }
 
@@ -67,19 +67,23 @@ export default function HorizontalLinearStepper() {
     setActiveStep(0);
   };
 
-  // Render the appropriate component based on the activeStep
   const renderStepContent = (step) => {
+    const commonProps = {
+      updateFormData: updateFormData,
+      formData: formData,
+    };
+
     switch (step) {
       case 0:
-        return <Basicinfo />;
+        return <Basicinfo {...commonProps} />;
       case 1:
-        return <Contactinfo />;
+        return <Contactinfo {...commonProps} />;
       case 2:
-        return <Dependent1 />;
+        return <Dependent1 {...commonProps} />;
       case 3:
-        return <Emergencycontact />;
-        case 4:
-          return <Attachments/>;
+        return <Emergencycontact {...commonProps} />;
+      case 4:
+        return <Attachments {...commonProps} />;
       default:
         return (
           <Typography sx={{ mt: 2, mb: 1 }}>
@@ -89,8 +93,40 @@ export default function HorizontalLinearStepper() {
     }
   };
 
+  const handleRegistration = async () => {
+    try {
+      const formDataToSend = new FormData();
+
+      for (let field in formData) {
+        if (formData.hasOwnProperty(field)) {
+          const value = formData[field];
+
+          if (value instanceof File) {
+            formDataToSend.append(field, value, value.name);
+          } else {
+            formDataToSend.append(field, value);
+          }
+        }
+      }
+
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        body: formDataToSend, 
+      });
+
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Form data is successfully registered", formData);
+      } else {
+        console.error(responseData.error);
+      }
+    } catch (error) {
+      console.error("There was an error registering the user:", error);
+    }
+  };
+
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps = {};
@@ -110,10 +146,8 @@ export default function HorizontalLinearStepper() {
           );
         })}
       </Stepper>
-      <Box sx={{ mt: 2, mb: 2 }}>
-        {renderStepContent(activeStep)}
-      </Box>
-      <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+      <Box sx={{ mt: 2, mb: 2 }}>{renderStepContent(activeStep)}</Box>
+      <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
         <Button
           color="inherit"
           disabled={activeStep === 0}
@@ -122,16 +156,17 @@ export default function HorizontalLinearStepper() {
         >
           Back
         </Button>
-        <Box sx={{ flex: '1 1 auto' }} />
+        <Box sx={{ flex: "1 1 auto" }} />
         {isStepOptional(activeStep) && (
           <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
             Skip
           </Button>
         )}
-
-        <Button onClick={handleNext}>
-          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-        </Button>
+        {activeStep === steps.length - 1 ? (
+          <Button onClick={handleRegistration}>Submit</Button>
+        ) : (
+          <Button onClick={handleNext}>Next</Button>
+        )}
       </Box>
     </Box>
   );
