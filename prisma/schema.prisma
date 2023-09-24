@@ -6,50 +6,57 @@ datasource db {
   provider = "mongodb"
   url      = "mongodb+srv://next_form_muzmail:fP0ScDAQSJuS5UCC@atlascluster.kur4ae8.mongodb.net/dummy_form"
 }
-model User {
-  id                            String   @id @default(auto()) @map("_id") @db.ObjectId
-  email                         String?   @unique
-  fullname                      String?
-  birthDate                     String?
-  gender                        String?
-  maritalStatus                 String?
-  nationality                   String?
-  passportNumber                String?
-  passportExpiry                String?
-  proofOfOrigin                 String?
-  originID                      String?
-  occupation                    String?
-  occupationDetails             String?
-  visaStatus                    String?
-  visaExpiry                    String?
-  rwandaStaySince               String?
-  dependantsInRwanda            String?
-  mobileNumber                  String? 
-  whatsappNumber                String? 
-  address                       String? 
-  province                      String? 
-  district                      String? 
-  cell                          String? 
-  relation                      String?
-  lastName                      String?
-  country                       String?
-  school                        String?
-  grade                         String?
-  otherInfo                     String?
-  expiryOfPermit                String? 
-  staying                       String?
-  idNumber                      String?
-  emergencycountry              String?
-  city                          String? 
-  contactPersonName             String? 
-  emergencycontact              String?
-  contactPersonNumber           String? 
-  passportCopyHead              String?
-  visa                          String?
-  passportCopyDep1              String?
-  visaDep1                      String?
-  passportCopyDep2              String?
-  visaDep2                      String?
-  updatedAt                     DateTime @updatedAt
+
+enum UserRole {
+  USER
+  ADMIN
 }
 
+model User {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  email               String?  @unique
+  fullname            String?
+  birthDate           String?
+  gender              String?
+  maritalStatus       String?
+  nationality         String?
+  passportNumber      String?
+  passportExpiry      String?
+  proofOfOrigin       String?
+  originID            String?
+  occupation          String?
+  occupationDetails   String?
+  visaStatus          String?
+  visaExpiry          String?
+  rwandaStaySince     String?
+  dependantsInRwanda  String?
+  mobileNumber        String?
+  whatsappNumber      String?
+  address             String?
+  province            String?
+  district            String?
+  cell                String?
+  relation            String?
+  lastName            String?
+  country             String?
+  school              String?
+  grade               String?
+  otherInfo           String?
+  expiryOfPermit      String?
+  staying             String?
+  idNumber            String?
+  emergencycountry    String?
+  city                String?
+  contactPersonName   String?
+  emergencycontact    String?
+  contactPersonNumber String?
+  passportCopyHead    String?
+  visa                String?
+  passportCopyDep1    String?
+  visaDep1            String?
+  passportCopyDep2    String?
+  visaDep2            String?
+  role                UserRole @default(USER)
+  userStatus          String? // pending approved rejected
+  updatedAt           DateTime @updatedAt
+}

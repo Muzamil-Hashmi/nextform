@@ -1,359 +1,302 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 import { useFormContext } from "@/context/FormContext";
-
+import {
+  Card,
+  Grid,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 
 const Dependent1 = () => {
-     const { formData, updateFormData } = useFormContext();
+  const { formData, updateFormData, errors } = useFormContext();
 
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      updateFormData({
-        ...formData,
-        [name]: value,
-      });
-    };
-    return (
-      <>
-        <div>
-          <div>
-            <div className="w-full h-14 pt-2 text-center  bg-gray-700  shadow overflow-hidden sm:rounded-md font-bold text-3xl text-white ">
-              Job Requisition Form
-            </div>
-            <section className="text-gray-600 body-font  m-0 p-0 relative" />
-            <div className="container    mx-auto">
-              <div className="flex flex-col text-center w-full mb-1"></div>
-              <div className="mt-10 md:mt-0 md:col-span-2">
-                <form action="#" method="POST">
-                  <div className="shadow overflow-hidden sm:rounded-md">
-                    <div className="px-2 py-8 bg-white sm:p-6">
-                      <div className="grid grid-cols-6 gap-6">
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="relation"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Relation
-                          </label>
-                          <select
-                            id="relation"
-                            name="relation"
-                            value={formData.relation}
-                            onChange={handleChange}
-                            autoComplete="country"
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option>Wife</option>
-                            <option>Husband</option>
-                            <option>Son</option>
-                            <option>Daughter</option>
-                            <option>Mother</option>
-                            <option>Father</option>
-                            <option>MIL</option>
-                            <option>FIL</option>
-                            <option>Brother</option>
-                            <option>Sister</option>
-                            <option>BIL</option>
-                            <option>Sill</option>
-                          </select>
-                        </div>
-                        {/* <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Full Name
-                          </label>
-                          <input
-                            type="text"
-                            name="fullname"
-                            value={formData.fullname}
-                            onChange={handleChange}
-                            placeholder="Enter Your full Name"
-                            id="name"
-                            autoComplete="name"
-                            className="mt-1 focus:ring-indigo-500 text-gray-300  focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 py-2 rounded-md"
-                          />
-                        </div> */}
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Last Name
-                          </label>
-                          <input
-                            type="text"
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleChange}
-                            placeholder="09/02/2021"
-                            id="last-name"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Nationality
-                          </label>
-                          <select
-                            id="country"
-                            name="country"
-                            value={formData.country}
-                            onChange={handleChange}
-                            autoComplete="country"
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option>Pakistan</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                          </select>
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Passport Number
-                          </label>
-                          <input
-                            type="number"
-                            name="passport"
-                            value={formData.passport}
-                            placeholder="00000000000"
-                            id="last-name"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    updateFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+  return (
+    <>
+      <Card className="p-4 shadow-lg rounded-md w-full">
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <InputLabel id="country-label">Relation</InputLabel>
+            <Select
+              fullWidth
+              labelId="country-label"
+              id="relation"
+              name="relation"
+              value={formData.relation}
+              onChange={handleChange}
+              error={!!errors.relation}
+              helperText={errors.relation}
+            >
+              <MenuItem value="Wife">Wife</MenuItem>
+              <MenuItem value="Husband">Husband</MenuItem>
+              <MenuItem value="Son">Son</MenuItem>
+              <MenuItem value="Daughter">Daughter</MenuItem>
+              <MenuItem value="Mother">Mother</MenuItem>
+              <MenuItem value="Father">Father</MenuItem>
+              <MenuItem value="MIL">Mother-In-Law (MIL)</MenuItem>
+              <MenuItem value="FIL">Father-In-Law (FIL)</MenuItem>
+              <MenuItem value="Brother">Brother</MenuItem>
+              <MenuItem value="Sister">Sister</MenuItem>
+              <MenuItem value="BIL">Brother-In-Law (BIL)</MenuItem>
+              <MenuItem value="SIL">Sister-In-Law (SIL)</MenuItem>
+            </Select>
+          </Grid>
 
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Expiray of Passport
-                          </label>
-                          <input
-                            type="text"
-                            name="passportExpiry"
-                            value={formData.passportExpiry}
-                            onChange={handleChange}
-                            placeholder="09/02/2021"
-                            id="passportExpiry"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Prof of Pakistani Origin
-                          </label>
-                          <select
-                            id="country"
-                            name="proofOfOrigin"
-                            value={formData.proofOfOrigin}
-                            onChange={handleChange}
-                            autoComplete="country"
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option>NIC</option>
-                            <option>POc</option>
-                            <option>Other</option>
-                          </select>
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Id number For prof of Origin
-                          </label>
-                          <input
-                            type="number"
-                            name="idNumber"
-                            value={formData.idNumber}
-                            onChange={handleChange}
-                            placeholder="00000000000"
-                            id="last-name"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Occupation
-                          </label>
-                          <select
-                            id="country"
-                            name="occupation"
-                            value={formData.occupation}
-                            onChange={handleChange}
-                            autoComplete="country"
-                            className="mt-3 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option className="mt-2">HR</option>
-                            <option>Job</option>
-                            <option>Business</option>
-                            <option>Student</option>
-                            <option>other</option>
-                          </select>
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Details of occupation / School Name and Grades
-                          </label>
-                          <input
-                            type="text"
-                            name="occupationDetails"
-                            value={formData.occupationDetails}
-                            onChange={handleChange}
-                            placeholder="Enter Your full Name"
-                            id="name"
-                            autoComplete="name"
-                            className="mt-1 focus:ring-indigo-500 text-gray-300  focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 py-2 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Name of School,College,University
-                          </label>
-                          <input
-                            type="text"
-                            name="school"
-                            value={formData.school}
-                            onChange={handleChange}
-                            placeholder="Enter Your full Name"
-                            id="name"
-                            autoComplete="name"
-                            className="mt-1 focus:ring-indigo-500 text-gray-300  focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 py-2 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Grade
-                          </label>
-                          <input
-                            type="text"
-                            name="grade"
-                            value={formData.grade}
-                            onChange={handleChange}
-                            placeholder="Enter Your full Name"
-                            id="name"
-                            autoComplete="name"
-                            className="mt-1 focus:ring-indigo-500 text-gray-300  focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 py-2 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Visa Status
-                          </label>
-                          <select
-                            id="country"
-                            name="visaStatus"
-                            value={formData.visaStatus}
-                            onChange={handleChange}
-                            autoComplete="country"
-                            className="mt-3 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                          >
-                            <option className="mt-2">HR</option>
-                            <option>Permit</option>
-                            <option>Visit visa</option>
-                            <option>Temprory Permit</option>
-                            <option>other</option>
-                          </select>
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            other Info
-                          </label>
-                          <input
-                            type="text"
-                            name="otherInfo"
-                            value={formData.otherInfo}
-                            onChange={handleChange}
-                            placeholder="Enter Your full Name"
-                            id="name"
-                            autoComplete="name"
-                            className="mt-1 focus:ring-indigo-500 text-gray-300  focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 py-2 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Expiray of Permit /visa
-                          </label>
-                          <input
-                            type="text"
-                            name="expiryOfPermit"
-                            value={formData.expiryOfPermit}
-                            onChange={handleChange}
-                            placeholder="09/02/2021"
-                            id="last-name"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="last-name"
-                            className="block text-sm font-medium text-gray-700"
-                          >
-                            Staying in Rawanda Since when ?
-                          </label>
-                          <input
-                            type="text"
-                            name="staying"
-                            value={formData.staying}
-                            onChange={handleChange}
-                            placeholder="09/02/2021"
-                            id="last-name"
-                            autoComplete="family-name"
-                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border py-2 border-gray-300 rounded-md"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div className="hidden sm:block" aria-hidden="true">
-              <div className="py-5">
-                <div className />
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
-}
+          <Grid item xs={12} sm={6}>
+            <InputLabel id="country-label">Last Name</InputLabel>
 
-export default Dependent1
+            <TextField
+              id="lastName"
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              placeholder="Last Name"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.lastName}
+              helperText={errors.lastName}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="country">Nationality</InputLabel>
+            <Select
+              fullWidth
+              id="country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              error={!!errors.country}
+              helperText={errors.country}
+            >
+              <MenuItem value="Pakistan">Pakistan</MenuItem>
+              <MenuItem value="Canada">Canada</MenuItem>
+              <MenuItem value="Mexico">Mexico</MenuItem>
+            </Select>
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="country">Expiry of Passport</InputLabel>
+            <TextField
+              id="passportExpiry"
+              type="text"
+              name="passportExpiry"
+              value={formData.passportExpiry}
+              onChange={handleChange}
+              placeholder="09/02/2021"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.passportExpiry}
+              helperText={errors.passportExpiry}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="proofOfOrigin">
+              Prof of Pakistani Origin
+            </InputLabel>
+            <Select
+              fullWidth
+              id="proofOfOrigin"
+              name="proofOfOrigin"
+              value={formData.proofOfOrigin}
+              onChange={handleChange}
+              error={!!errors.proofOfOrigin}
+              helperText={errors.proofOfOrigin}
+            >
+              <MenuItem value="NIC">NIC</MenuItem>
+              <MenuItem value="POc">POc</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="country">
+              Id number For prof of Origin
+            </InputLabel>
+            <TextField
+              id="idNumber"
+              type="number"
+              name="idNumber"
+              value={formData.idNumber}
+              onChange={handleChange}
+              placeholder="00000000000"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.idNumber}
+              helperText={errors.idNumber}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="occupation">Occupation</InputLabel>
+            <Select
+              fullWidth
+              id="occupation"
+              name="occupation"
+              value={formData.occupation}
+              onChange={handleChange}
+              error={!!errors.occupation}
+              helperText={errors.occupation}
+            >
+              <MenuItem value="HR">HR</MenuItem>
+              <MenuItem value="Job">Job</MenuItem>
+              <MenuItem value="Business">Business</MenuItem>
+              <MenuItem value="Student">Student</MenuItem>
+              <MenuItem value="other">other</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="country">
+              Details of occupation / School Name and Grades
+            </InputLabel>
+            <TextField
+              id="occupationDetails"
+              type="text"
+              name="occupationDetails"
+              value={formData.occupationDetails}
+              onChange={handleChange}
+              placeholder="Enter Details"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.occupationDetails}
+              helperText={errors.occupationDetails}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="occupation">
+              Name of School, College, University
+            </InputLabel>
+
+            <TextField
+              id="school"
+              type="text"
+              name="school"
+              value={formData.school}
+              onChange={handleChange}
+              placeholder="Enter the Name of School, College, University"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.grade}
+              helperText={errors.grade}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="occupation">Grade</InputLabel>
+
+            <TextField
+              id="grade"
+              type="text"
+              name="grade"
+              value={formData.grade}
+              onChange={handleChange}
+              placeholder="Enter the Grade"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.grade}
+              helperText={errors.grade}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel id="visaStatus-label">Visa Status</InputLabel>
+            <Select
+              fullWidth
+              labelId="visaStatus-label"
+              id="visaStatus"
+              name="visaStatus"
+              value={formData.visaStatus}
+              onChange={handleChange}
+              label="Visa Status"
+              error={!!errors.visaStatus}
+              helperText={errors.visaStatus}
+            >
+              <MenuItem value="HR">HR</MenuItem>
+              <MenuItem value="Permit">Permit</MenuItem>
+              <MenuItem value="Visit visa">Visit Visa</MenuItem>
+              <MenuItem value="Temporary Permit">Temporary Permit</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </Select>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="occupation">Other Info</InputLabel>
+
+            <TextField
+              id="otherInfo"
+              type="text"
+              name="otherInfo"
+              value={formData.otherInfo}
+              onChange={handleChange}
+              placeholder="Enter Your full Name"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.otherInfo}
+              helperText={errors.otherInfo}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="occupation">Expiry of Permit/Visa</InputLabel>
+
+            <TextField
+              id="expiryOfPermit"
+              type="text"
+              name="expiryOfPermit"
+              value={formData.expiryOfPermit}
+              onChange={handleChange}
+              placeholder="09/02/2021"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.expiryOfPermit}
+              helperText={errors.expiryOfPermit}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <InputLabel htmlFor="occupation">
+              Staying in Rawanda Since when?
+            </InputLabel>
+
+            <TextField
+              id="staying"
+              type="text"
+              name="staying"
+              value={formData.staying}
+              onChange={handleChange}
+              placeholder="09/02/2021"
+              fullWidth
+              variant="outlined"
+              className="mb-3"
+              error={!!errors.staying}
+              helperText={errors.staying}
+            />
+          </Grid>
+        </Grid>
+      </Card>
+    </>
+  );
+};
+
+export default Dependent1;

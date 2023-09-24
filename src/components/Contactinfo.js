@@ -1,123 +1,121 @@
 "use client";
 import React from "react";
-import { useFormContext } from "@/context/FormContext"; 
+import { useFormContext } from "@/context/FormContext";
+import {
+  Card,
+  Grid,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 
 const Contactinfo = () => {
-  const { formData, updateFormData } = useFormContext();
+  const { formData, updateFormData, errors } = useFormContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-        updateFormData({
+    updateFormData({
       ...formData,
-      [name]: value
+      [name]: value,
     });
   };
 
   return (
-    <>
-      <div className="mb-5">
-        <label
-          htmlFor="mobileNumber"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          Mobile Number
-        </label>
-        <input
-          type="number" 
-          name="mobileNumber"
-          id="mobileNumber"
-          value={formData.mobileNumber}
-          onChange={handleChange}
-          placeholder="Mobile Number"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="whatsappNumber"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          Whatsapp Number
-        </label>
-        <input
-          type="number"
-          name="whatsappNumber"
-          id="whatsappNumber"
-          value={formData.whatsappNumber}
-          onChange={handleChange}
-          placeholder="Whatsapp Number"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="address"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          Address
-        </label>
-        <input
-          type="text"
-          name="address"
-          id="address"
-          value={formData.address}
-          onChange={handleChange}
-          placeholder="Address"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="province"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          Province
-        </label>
-        <input
-          type="text"
-          name="province"
-          id="province"
-          value={formData.province}
-          onChange={handleChange}
-          placeholder="Province"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="district"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          District
-        </label>
-        <input
-          type="text"
-          name="district"
-          id="district"
-          value={formData.district}
-          onChange={handleChange}
-          placeholder="District"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-      <div className="mb-5">
-        <label
-          htmlFor="cell"
-          className="mb-3 block text-base font-medium text-[#07074D]"
-        >
-          Cell
-        </label>
-        <input
-          type="number"
-          name="cell"
-          id="cell"
-          value={formData.cell}
-          onChange={handleChange}
-          placeholder="Cell"
-          className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-        />
-      </div>
-    </>
+    <Card className="p-4 shadow-lg rounded-md w-full">
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="mobileNumber">Mobile Number</InputLabel>
+          <TextField
+            id="mobileNumber"
+            type="number"
+            name="mobileNumber"
+            value={formData.mobileNumber}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.mobileNumber}
+            helperText={errors.mobileNumber}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="whatsappNumber">Whatsapp Number</InputLabel>
+          <TextField
+            id="whatsappNumber"
+            type="number"
+            name="whatsappNumber"
+            value={formData.whatsappNumber}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.whatsappNumber}
+            helperText={errors.whatsappNumber}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="address">Address</InputLabel>
+          <TextField
+            id="address"
+            type="text"
+            name="address"
+            value={formData.address}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.address}
+            helperText={errors.address}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="province">Province</InputLabel>
+          <TextField
+            id="province"
+            type="text"
+            name="province"
+            value={formData.province}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.province}
+            helperText={errors.province}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="district">District</InputLabel>
+          <TextField
+            id="district"
+            type="text"
+            name="district"
+            value={formData.district}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.district}
+            helperText={errors.district}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <InputLabel htmlFor="cell">Cell</InputLabel>
+          <TextField
+            id="cell"
+            type="number"
+            name="cell"
+            value={formData.cell}
+            onChange={handleChange}
+            fullWidth
+            variant="outlined"
+            className="mb-3"
+            error={!!errors.cell}
+            helperText={errors.cell}
+          />
+        </Grid>
+      </Grid>
+    </Card>
   );
 };
 

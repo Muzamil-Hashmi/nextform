@@ -1,12 +1,11 @@
-import Stepperr from '@/components/Stepperr'
-import React from 'react'
+import Stepper from '@/components/Stepperr'
 
 
 
 const page = () => {
   return (
     <div className='m-10'>
-      <Stepperr />
+      <Stepper />
     </div>
     )
 }

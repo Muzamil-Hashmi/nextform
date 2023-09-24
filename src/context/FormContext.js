@@ -8,7 +8,6 @@ export const useFormContext = () => useContext(FormContext);
 export const FormProvider = ({ children }) => {
   const [formData, setFormData] = useState({
     email: "",
-    // name: "",
     birthDate: "",
     gender: "",
     maritalStatus: "",
@@ -54,12 +53,16 @@ export const FormProvider = ({ children }) => {
     proofOfOrigin: "",
   });
 
+const [errors, setErrors] = useState({});
+
   const updateFormData = (data) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
   return (
-    <FormContext.Provider value={{ formData, updateFormData }}>
+    <FormContext.Provider
+      value={{ formData, updateFormData, errors, setErrors }}
+    >
       {children}
     </FormContext.Provider>
   );
