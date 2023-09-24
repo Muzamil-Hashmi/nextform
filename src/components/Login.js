@@ -14,11 +14,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState('')
+  const [success, setSuccess] = useState("");
 
   const handleLogin = async () => {
     setLoading(true);
     setError(null);
+    if (email === "") {
+      setError("Please enter email");
+    }
 
     try {
       const response = await fetch("/api/auth/login", {
